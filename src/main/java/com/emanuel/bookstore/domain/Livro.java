@@ -1,16 +1,32 @@
 package com.emanuel.bookstore.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Livro {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Livro implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String nome_autor;
 	private String texto;
-
-	private List<Categoria> Categoria = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name="categoria_id")
+	private Categoria categoria;
 
 	public Livro() {
 		super();
@@ -18,14 +34,16 @@ public class Livro {
 	}
 
 	public Livro(Integer id, String nome, String nome_autor, String texto,
-			List<com.emanuel.bookstore.domain.Categoria> categoria) {
+			Categoria categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.nome_autor = nome_autor;
 		this.texto = texto;
-		Categoria = categoria;
+		this.categoria = categoria;
 	}
+
+	
 
 	public Integer getId() {
 		return id;
@@ -59,12 +77,12 @@ public class Livro {
 		this.texto = texto;
 	}
 
-	public List<Categoria> getCategoria() {
-		return Categoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setCategoria(List<Categoria> categoria) {
-		Categoria = categoria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
