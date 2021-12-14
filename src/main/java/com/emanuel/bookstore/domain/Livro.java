@@ -1,8 +1,6 @@
 package com.emanuel.bookstore.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -23,9 +21,9 @@ public class Livro implements Serializable {
 	private String nome;
 	private String nome_autor;
 	private String texto;
-	
+
 	@ManyToOne
-	@JoinColumn(name="categoria_id")
+	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
 	public Livro() {
@@ -33,8 +31,7 @@ public class Livro implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Livro(Integer id, String nome, String nome_autor, String texto,
-			Categoria categoria) {
+	public Livro(Integer id, String nome, String nome_autor, String texto, Categoria categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -42,8 +39,6 @@ public class Livro implements Serializable {
 		this.texto = texto;
 		this.categoria = categoria;
 	}
-
-	
 
 	public Integer getId() {
 		return id;
